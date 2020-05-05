@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-11-29 Thu 08:58 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Neo4J Cypher Summary</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Lianheng Tong" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<style type="text/css">
+/*<![CDATA[*/
+  .textsc {
+    font-variant: small-caps;
+  }
+  .abstract {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid black
+  }
+  .abstract:before {
+    content: "Abstract: ";
+    font-weight: bold
+  }
+  #table-of-contents {
+    font-size: 9pt;
+    position: fixed;
+    right: 0em;
+    top: 0em;
+    padding-left: 0em;
+    padding-right: 0.5em;
+    background: white;
+    -webkit-box-shadow: 0 0 1em #777777;
+    -moz-box-shadow: 0 0 1em #777777;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    text-align: right;
+    /* ensure doesn't flow off the screen when expanded */
+    max-height: 80%;
+    overflow: auto;
+    z-index: 200;
+  }
+  #table-of-contents h2 {
+    font-size: 9pt;
+    max-width: 8em;
+    font-weight: normal;
+    padding-left: 0.5em;
+    padding-top: 0.05em;
+    padding-bottom: 0.05em;
+  }
+  #table-of-contents ul {
+    margin-left: 14pt;
+    margin-bottom: 10pt;
+    padding: 0
+  }
+  #table-of-contents li {
+    padding: 0;
+    margin: 1px;
+    list-style: none;
+  }
+  #table-of-contents ul>:first-child {
+    color: blue;
+  }
+  #table-of-contents #text-table-of-contents {
+    display: none;
+    text-align: left;
+  }
+  #table-of-contents:hover #text-table-of-contents {
+    display: block;
+    padding: 0.5em;
+    margin-top: -1.5em;
+  }
+  table {
+    border: 1px solid black;
+  }
+  th, td {
+    border-right: 1px solid black;
+  }
+  tr:hover {
+    background-color: #f5f5f5
+  }
+/*]]*/
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Neo4J Cypher Summary</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org89283ba">1. Overview</a></li>
+<li><a href="#org486a1bb">2. Nodes</a>
+<ul>
+<li><a href="#org0dc08de">2.1. Handle name</a></li>
+<li><a href="#org29fd160">2.2. Specifying type</a></li>
+<li><a href="#orgf97c204">2.3. Attributes</a></li>
+</ul>
+</li>
+<li><a href="#org10fffc1">3. Edges</a>
+<ul>
+<li><a href="#org7406ea9">3.1. Directional edges</a></li>
+<li><a href="#org85d38e2">3.2. Without specifying direction</a></li>
+<li><a href="#orgf8c9f21">3.3. Handle name</a></li>
+<li><a href="#orgff19cd9">3.4. Specifying type</a></li>
+<li><a href="#org64e62b4">3.5. Attributes</a></li>
+</ul>
+</li>
+<li><a href="#orgeab3ff0">4. Matching</a>
+<ul>
+<li><a href="#orgee537e0">4.1. Repeating Patterns</a></li>
+<li><a href="#orgd3c67a6">4.2. Selecting Features</a></li>
+<li><a href="#orgfb2ec43">4.3. Refining Search</a></li>
+<li><a href="#orge6d8653">4.4. Connecting Multiple Queries</a></li>
+<li><a href="#orgb3045a0">4.5. Removing Duplicate Results</a></li>
+</ul>
+</li>
+<li><a href="#org5acf9f6">5. Creating</a>
+<ul>
+<li><a href="#org38187b2">5.1. Merging</a></li>
+</ul>
+</li>
+<li><a href="#org447fc72">6. Deleting</a></li>
+<li><a href="#org7cf356c">7. Modifying</a></li>
+<li><a href="#org0fc2d38">8. Path Analysis</a></li>
+<li><a href="#orgc50cebf">9. Python Interface</a>
+<ul>
+<li><a href="#orgf35e3f2">9.1. Installing Neo4j Python API</a></li>
+<li><a href="#org92ff975">9.2. Using Python API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org89283ba" class="outline-2">
+<h2 id="org89283ba"><span class="section-number-2">1</span> Overview</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Due to the significant difference between graphical databases and
+relational databases, SQL is no longer a suitable language for
+querying a graphical database.  For instance, SQL do not provide any
+construct to describe complex relationships between the different
+data entities, whereas graphs are a bout analysing relationships.
+</p>
+
+<p>
+Cypher is Neo4j's own querying language, and it is designed to
+reflect the node-edge structure of the graphical database. Much of
+the language is based on "ASCII art", drawing nodes&#x2014;represented by
+pair of parenthesis "()"&#x2014;and edges&#x2014;represented by arrows
+"-[]-&gt;". Querying is about "drawing" the shape of relationships
+represented by nodes and edges, with the computer trying to find the
+structure within the database that would match the given shape.
+</p>
+
+<p>
+For example, if I wish to search for all friends of a person called
+Alice, we would draw the following shape in Cypher:
+</p>
+<pre class="example">
+({name: 'Alice'}) -[:FRIENDS_WITH]-&gt; ()
+</pre>
+
+<p>
+In the above we are describing a shape, where there must be:
+</p>
+<ul class="org-ul">
+<li>a node with an attribute "name" whose value is "Alice"</li>
+<li>an edge of the type "FRIENDS_WITH" that connects from the node
+"Alice" with another node. There are no restrictions to that node,
+so the node can be anything.</li>
+</ul>
+
+<p>
+Thus this means we are searching for anyone who is connected to a
+node called with name "Alice" by an edge of the type "FRIENDS_WITH".
+</p>
+</div>
+</div>
+
+<div id="outline-container-org486a1bb" class="outline-2">
+<h2 id="org486a1bb"><span class="section-number-2">2</span> Nodes</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Nodes are always represented by "()". An empty
+</p>
+<pre class="example">
+()
+</pre>
+<p>
+means any node.
+</p>
+</div>
+<div id="outline-container-org0dc08de" class="outline-3">
+<h3 id="org0dc08de"><span class="section-number-3">2.1</span> Handle name</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+It is often useful to give a <b><b>temporary</b></b> name to a particular
+node in a Cypher query, so that we can refer to it later on. This
+is done by just adding a name in the "()". For example
+</p>
+<pre class="example">
+(var1)
+</pre>
+<p>
+We have named our node "a", so it can be later on referred to as "var1"
+</p>
+</div>
+</div>
+<div id="outline-container-org29fd160" class="outline-3">
+<h3 id="org29fd160"><span class="section-number-3">2.2</span> Specifying type</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+We can specify what type of node we are looking for.  This is done
+using adding ":type" following the handle name in "()".
+</p>
+<pre class="example">
+(var1:Person)
+</pre>
+<p>
+means a node of the type "Person", and we refer to it in our query
+as "var1"
+</p>
+</div>
+</div>
+<div id="outline-container-orgf97c204" class="outline-3">
+<h3 id="orgf97c204"><span class="section-number-3">2.3</span> Attributes</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+A node can have any number of attributes. And we can specify
+attributes of a node by using key-value pairs contained within
+"{}", following the node type:
+</p>
+<pre class="example">
+(var1:Person {name : 'Alice', location : 'London'})
+</pre>
+<p>
+means a node of type "Person", who must have attributes name equal
+to "Alice", and location equal to "London", and we will refer to it
+as "var1".
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org10fffc1" class="outline-2">
+<h2 id="org10fffc1"><span class="section-number-2">3</span> Edges</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org7406ea9" class="outline-3">
+<h3 id="org7406ea9"><span class="section-number-3">3.1</span> Directional edges</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Edges are denoted in Cypher as "-[]-&gt;", or "&lt;-[]-", depending on
+the direction of the edge.
+</p>
+
+<p>
+More details can be added to the edges by putting more information
+in inside the pair of "[]".
+</p>
+</div>
+</div>
+<div id="outline-container-org85d38e2" class="outline-3">
+<h3 id="org85d38e2"><span class="section-number-3">3.2</span> Without specifying direction</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+We do not have to specify a direction for edge.  If we do not
+specify direction, then it means either directions are okay.
+</p>
+
+<p>
+To enter an edge without direction, all you have to do is to remove
+the arrow:
+</p>
+<pre class="example">
+-[]-
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf8c9f21" class="outline-3">
+<h3 id="orgf8c9f21"><span class="section-number-3">3.3</span> Handle name</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Just like nodes, edges can be given a <b><b>temporary</b></b> name:
+</p>
+<pre class="example">
+-[a]-&gt;
+</pre>
+<p>
+corresponds to an edge pointing from left to right, which can be
+referred to as "a" in the rest of the query.
+</p>
+</div>
+</div>
+<div id="outline-container-orgff19cd9" class="outline-3">
+<h3 id="orgff19cd9"><span class="section-number-3">3.4</span> Specifying type</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+We can also specify what kind of edge we are looking for, again
+using the same rules as for nodes:
+</p>
+<pre class="example">
+-[a:FRIENDS_WITH]-&gt;
+</pre>
+<p>
+corresponds to an edge pointing left to right, of the type
+"FRIENDS_WITH", and we may refer to it as "a".
+</p>
+</div>
+</div>
+<div id="outline-container-org64e62b4" class="outline-3">
+<h3 id="org64e62b4"><span class="section-number-3">3.5</span> Attributes</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+Edges can also have attributes:
+</p>
+<pre class="example">
+-[a:FRIENDS_WITH {since : 2000}]
+</pre>
+<p>
+corresponds to an edge of type "FRIENDS_WITH", with attribute since
+equals to 2000, pointing from left to right, which we refer to in
+our query as "a".
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeab3ff0" class="outline-2">
+<h2 id="orgeab3ff0"><span class="section-number-2">4</span> Matching</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+To find a set of nodes and edges linking them in a Neo4j database,
+use: <code>MATCH RETURN</code>, for example:
+</p>
+<pre class="example">
+MATCH (var1:Person {name : 'Alice'}) -[a:FRIENDS_WITH]-&gt; (b:Person)
+RETURN var1, a, b
+</pre>
+<p>
+would try to find the pattern of all possible persons connected to a
+Person node whose name is "Alice", and give us back the node "Alice"
+and all friends of Alice, and all the "FRIENDS__WITH" edges
+connecting "Alice' with her friends.
+</p>
+</div>
+<div id="outline-container-orgee537e0" class="outline-3">
+<h3 id="orgee537e0"><span class="section-number-3">4.1</span> Repeating Patterns</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+How do we find friends of friends of Alice?
+</p>
+
+<p>
+In this case we want to search for all the patterns:
+</p>
+<pre class="example">
+(a:Person {name : "Alice"}) -[:FRIENDS_WITH]-&gt; ()
+</pre>
+<p>
+and
+</p>
+<pre class="example">
+(a:Person {name : "Alice"}) -[:FRIENDS_WITH]-&gt; () -[:FRIENDS_WITH]-&gt; ()
+</pre>
+<p>
+and
+</p>
+<pre class="example">
+(a:Person {name : "Alice"}) -[:FRIENDS_WITH]-&gt; () -[:FRIENDS_WITH]-&gt; () -[:FRIENDS_WITH]-&gt; ()
+</pre>
+<p>
+and so on.
+</p>
+
+<p>
+In Cypher, such repeated patterns can be expressed by
+</p>
+<pre class="example">
+(a:Person {name : "Alice"}) -[:FRIENDS_WITH *1..]-&gt;(b:Person)
+</pre>
+
+<p>
+The key here is the notation "*1..", it means this relationship
+repeated over 1 or more times.
+</p>
+
+<p>
+If you wish to restrict the search to only the immediate friend and
+their immediate friends, then we can specify a upper limit:
+</p>
+<pre class="example">
+(a:Person {name : "Alice"}) -[:FRIENDS_WITH *1..2]-&gt;(b:Person)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd3c67a6" class="outline-3">
+<h3 id="orgd3c67a6"><span class="section-number-3">4.2</span> Selecting Features</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+When returning result, by default the entire nodes and edges will
+be output.  We can also be more specific, and ask Neo4J to just
+produce a table for only the relevant attribute values to your
+query:
+</p>
+
+<p>
+For example, if we only want to know the name of all immediate
+friends of Alice:
+</p>
+<pre class="example">
+MATCH (a:Person {name : "Alice"}) -[b:FRIENDS_WITH]-&gt;(c:Person)
+RETURN c.name, c.age
+</pre>
+<p>
+will only output a table of two columns&#x2014;name and age&#x2014;of all of
+the friends of Alice.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfb2ec43" class="outline-3">
+<h3 id="orgfb2ec43"><span class="section-number-3">4.3</span> Refining Search</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Just like SQL, we can refine our searches by adding a filter using
+<code>WHERE</code> statement.  For example, if we wish to find all Alice's
+friends who are younger than 30, then we can use the query:
+</p>
+<pre class="example">
+MATCH (a:Person {name : "Alice"}) -[b:FRIENDS_WITH]-&gt;(c:Person)
+WHERE c.age &lt; 30
+RETURN c
+</pre>
+
+<p>
+The full list of operators one can use for comparisons can be found
+here:
+<a href="https://neo4j.com/docs/cypher-manual/current/syntax/operators/#query-operators-summary">https://neo4j.com/docs/cypher-manual/current/syntax/operators/#query-operators-summary</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge6d8653" class="outline-3">
+<h3 id="orge6d8653"><span class="section-number-3">4.4</span> Connecting Multiple Queries</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+We can also construct more complex queries that are made up with
+multiple simpler queries. The results of one query can be passed
+directly to the next query using the <code>WITH</code> statement.
+</p>
+
+<p>
+For example, suppose we wish to find the list of sport activity
+liked by friends of Alice who are younger than 30. This can be
+constructed as two queries:
+</p>
+<ol class="org-ol">
+<li>Friends of Alice who are younger than 30</li>
+<li>Sports liked by those friends</li>
+</ol>
+
+<p>
+The matching statement can be constructed as follows:
+</p>
+<pre class="example">
+MATCH (a:Person {name : "Alice"}) -[:FRIENDS_WITH]-&gt; (b:Person)
+WHERE b.age &lt; 30
+WITH b
+MATCH (b) -[:LIKES]-&gt; (:Sport c)
+RETURN c.name
+</pre>
+<p>
+The results will be the list of sports liked by Alice's immediate
+friends. Notice how the symbol <code>b</code> is carried over from one query
+to another.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb3045a0" class="outline-3">
+<h3 id="orgb3045a0"><span class="section-number-3">4.5</span> Removing Duplicate Results</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+We can eliminate duplicate results by using the <code>RETURN DISTINCT</code>
+statement:
+</p>
+<pre class="example">
+MATCH (a:Person {name: "Alice"}) -[FRIENDS_WITH *]- (b:Person)
+RETURN DISTINCT b.name
+</pre>
+<p>
+In the above example, we try to find all people that Alice has a
+connection with, may be directly, or through friends or friend of
+friends etc.  There may be duplicates in the names, so we use
+<code>RETURN DISTINCT</code> to only display unique names in the results.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5acf9f6" class="outline-2">
+<h2 id="org5acf9f6"><span class="section-number-2">5</span> Creating</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Patterns can be created in one go, using the <code>CREATE</code> statement:
+</p>
+<pre class="example">
+CREATE (a:Person {name: "Alice", age : 25}) -[c:FRIENDS_WITH]-&gt; (b:Person {name : "Bob", age : 24})
+</pre>
+<p>
+will create a person called Alice, a person called Bob, and a
+relationship stating that Alice is friends with Bob.
+</p>
+
+<p>
+If we wish to create a new relationship for two existing nodes, then we need to
+</p>
+<ol class="org-ol">
+<li>Find the nodes first</li>
+<li>Then create relationship</li>
+</ol>
+
+<p>
+For example:
+</p>
+<pre class="example">
+MATCH (a:Person {name : "Alice"})
+WITH a
+MATCH (b:Person {name : "Bob"})
+WITH b
+CREATE (a) -[:FRIENDS_WITH]-&gt; (b)
+</pre>
+</div>
+
+<div id="outline-container-org38187b2" class="outline-3">
+<h3 id="org38187b2"><span class="section-number-3">5.1</span> Merging</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<code>CREATE</code> will always add a new node or edge, even if there already
+exists an identical node in the database. <code>MERGE</code> on the other hand
+will only update the database, and will avoid creating duplicates.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org447fc72" class="outline-2">
+<h2 id="org447fc72"><span class="section-number-2">6</span> Deleting</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Deleting follows almost exact syntax as creating, the only
+difference is the "DELETE" keyword.
+</p>
+
+<p>
+For example, we wish to remove Bob from the database, in this case
+we need to find Bob, and delete him.  But before we carry on, we
+first need to delete all the relationships connected to Bob as well,
+as no relationship is allowed to be "dangling".
+</p>
+<pre class="example">
+MATCH (b:Person {name: "Bob"}) -[e]- (f)
+DELETE b, e
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7cf356c" class="outline-2">
+<h2 id="org7cf356c"><span class="section-number-2">7</span> Modifying</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+You can modify the attributes of a node or edge using <code>SET</code> statement.
+</p>
+
+<p>
+E.g. If we wish to change Alice's location to Manchester:
+</p>
+<pre class="example">
+MATCH (a:Person {name : "Alice"})
+WITH a
+SET a.location = "Manchester"
+</pre>
+
+<p>
+If an attribute do not exist, the act of setting a value will add
+that attribute to the node or edge.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fc2d38" class="outline-2">
+<h2 id="org0fc2d38"><span class="section-number-2">8</span> Path Analysis</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Neo4j Provides us with a set of pre-existing functions for
+performing simple path analysis from node A to node B in our network
+of nodes and edges. The following page provides a detailed list and
+manual for the provided path analysis algorithms available to Neo4j:
+<a href="https://neo4j.com/docs/graph-algorithms/current/algorithms/pathfinding/">https://neo4j.com/docs/graph-algorithms/current/algorithms/pathfinding/</a>
+</p>
+
+<p>
+For us, the <code>shortestPath()</code> function may be the most useful.
+</p>
+
+<p>
+For example, suppose Alice and Charlie do not know each other, but
+they are connected through mutual friends. We wish to find out the
+least number of friends Alice needs to contact who will help to
+introduce her to Charlie.  The solution to this problem lies in
+finding the shortest path between the node Alice and the node Bob:
+</p>
+<pre class="example">
+MATCH path = shortestPath(
+  (a:Person {name : "Alice"}) -[:FRIENDS_WITH *1..]-&gt; (c:Person {name : "Charlie"})
+)
+RETURN path
+</pre>
+<p>
+The result will be the shortest path between the node Alice and node
+Charlie.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc50cebf" class="outline-2">
+<h2 id="orgc50cebf"><span class="section-number-2">9</span> Python Interface</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-orgf35e3f2" class="outline-3">
+<h3 id="orgf35e3f2"><span class="section-number-3">9.1</span> Installing Neo4j Python API</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+Neo4j's python API is provided by the module "neo4j-driver". It is
+not installed as part of Anaconda, so we need to install manually.
+</p>
+
+<p>
+The instructions are provided by <a href="https://neo4j.com/developer/python/">https://neo4j.com/developer/python/</a>.
+</p>
+
+<p>
+We need to use <code>pip</code> to install the API&#x2014;conda do not have the
+neo4j-driver as one of its packages:
+</p>
+<pre class="example">
+pip install neo4j-driver
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org92ff975" class="outline-3">
+<h3 id="org92ff975"><span class="section-number-3">9.2</span> Using Python API</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+To use the Python API, you need to import the neo4j module:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> neo4j <span style="color: #859900; font-weight: bold;">import</span> GraphDatabase
+</pre>
+</div>
+
+<p>
+Then you need to connect to the server hosting the database. For
+example if the database is hosted locally, then server URL would
+be:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">neo4j_url</span> = <span style="color: #2aa198;">'bolt:127.0.0.1:7687'</span>
+</pre>
+</div>
+<p>
+This information can be found from the address bar of the neo4j
+browser. Note that neo4j uses bolt protocol, so we need to put
+<code>bolt:</code> in front of the url.
+</p>
+
+<p>
+To connect, we create a driver instance:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">with</span> GraphDatabase.driver(neo4j_url, auth=(<span style="color: #2aa198;">'neo4j'</span>, <span style="color: #2aa198;">'qa'</span>)) <span style="color: #859900; font-weight: bold;">as</span> driver:
+    <span style="color: #586e75;"># </span><span style="color: #586e75;">rest of the code</span>
+</pre>
+</div>
+<p>
+the <code>auth</code> option provides a tuple of user name followed by password
+to access the database.
+</p>
+
+<p>
+Now we have a driver, we need to open a session:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">with</span> driver.session() <span style="color: #859900; font-weight: bold;">as</span> session:
+    <span style="color: #586e75;"># </span><span style="color: #586e75;">rest of the code</span>
+</pre>
+</div>
+
+<p>
+And then in each session, we open a transaction:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">with</span> session.begin_transaction <span style="color: #859900; font-weight: bold;">as</span> tx:
+    <span style="color: #586e75;"># </span><span style="color: #586e75;">rest of the code</span>
+</pre>
+</div>
+
+<p>
+Neo4j's transactions are ACID , this means each transaction will be
+treated as a single unit, and if something fails in the transaction
+then the entire transaction fails.
+</p>
+
+<p>
+Once we have opened a transaction, we can now pass Cypher
+instructions to neo4j, using the method <code>.run()</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">result</span> = tx.run(<span style="color: #2aa198;">'MATCH (a:Person) RETURN a'</span>)
+</pre>
+</div>
+
+<p>
+The results will then contain an iterator of all the results
+returned. To obtain for example, the list of names, we can use the
+code:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">for</span> record <span style="color: #859900; font-weight: bold;">in</span> result:
+    <span style="color: #268bd2;">name</span> = record[<span style="color: #2aa198;">'a'</span>][<span style="color: #2aa198;">'name'</span>]
+    <span style="color: #859900; font-weight: bold;">print</span>(name)
+</pre>
+</div>
+
+<p>
+Note that each record in the results iterator can be regarded as a
+nested dictionary: the first key ('a') is the name of the variable
+we used in the <code>RETURN</code> statement of the Cypher query we wrote in
+the transaction. The second level keys are then the properties of
+objects 'a'.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Lianheng Tong</p>
+<p class="date">Created: 2018-11-29 Thu 08:58</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
