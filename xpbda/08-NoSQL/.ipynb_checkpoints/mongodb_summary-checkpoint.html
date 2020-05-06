@@ -1,0 +1,1310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-11-29 Thu 12:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mongodb Summary</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Lianheng Tong" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<style type="text/css">
+/*<![CDATA[*/
+  .textsc {
+    font-variant: small-caps;
+  }
+  .abstract {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid black
+  }
+  .abstract:before {
+    content: "Abstract: ";
+    font-weight: bold
+  }
+  #table-of-contents {
+    font-size: 9pt;
+    position: fixed;
+    right: 0em;
+    top: 0em;
+    padding-left: 0em;
+    padding-right: 0.5em;
+    background: white;
+    -webkit-box-shadow: 0 0 1em #777777;
+    -moz-box-shadow: 0 0 1em #777777;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    text-align: right;
+    /* ensure doesn't flow off the screen when expanded */
+    max-height: 80%;
+    overflow: auto;
+    z-index: 200;
+  }
+  #table-of-contents h2 {
+    font-size: 9pt;
+    max-width: 8em;
+    font-weight: normal;
+    padding-left: 0.5em;
+    padding-top: 0.05em;
+    padding-bottom: 0.05em;
+  }
+  #table-of-contents ul {
+    margin-left: 14pt;
+    margin-bottom: 10pt;
+    padding: 0
+  }
+  #table-of-contents li {
+    padding: 0;
+    margin: 1px;
+    list-style: none;
+  }
+  #table-of-contents ul>:first-child {
+    color: blue;
+  }
+  #table-of-contents #text-table-of-contents {
+    display: none;
+    text-align: left;
+  }
+  #table-of-contents:hover #text-table-of-contents {
+    display: block;
+    padding: 0.5em;
+    margin-top: -1.5em;
+  }
+  table {
+    border: 1px solid black;
+  }
+  th, td {
+    border-right: 1px solid black;
+  }
+  tr:hover {
+    background-color: #f5f5f5
+  }
+/*]]*/
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Mongodb Summary</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orged5c5a4">1. Installing Mongodb</a></li>
+<li><a href="#org10f8852">2. Starting Mongodb Server</a></li>
+<li><a href="#org705a29c">3. Mongodb Data Structure</a></li>
+<li><a href="#orgd20fe42">4. List DBs and Collections</a></li>
+<li><a href="#org0f2649a">5. Querying Interface</a>
+<ul>
+<li><a href="#org01900c3">5.1. Mongodb Console</a></li>
+<li><a href="#org9d5b46a">5.2. Compass</a></li>
+<li><a href="#org1305dad">5.3. Python Interface</a></li>
+</ul>
+</li>
+<li><a href="#orge32edf5">6. Importing JSON files</a></li>
+<li><a href="#org6603f8f">7. Selecting Database</a></li>
+<li><a href="#orgb09ee25">8. Querying</a>
+<ul>
+<li><a href="#org93aa966">8.1. Find All</a></li>
+<li><a href="#org7d892bc">8.2. Equality</a></li>
+<li><a href="#org72069bb">8.3. Nested Attributes</a></li>
+<li><a href="#org29735dd">8.4. Operators</a>
+<ul>
+<li><a href="#org6a20a11">8.4.1. Not Equal</a></li>
+<li><a href="#orgb3b1355">8.4.2. Comparison</a></li>
+<li><a href="#org3f221cb">8.4.3. Existence</a></li>
+<li><a href="#org5a6cd3a">8.4.4. In a collection</a></li>
+<li><a href="#org89416ca">8.4.5. or</a></li>
+<li><a href="#org3cde561">8.4.6. Search within a nested element</a></li>
+<li><a href="#orgc9d73ab">8.4.7. Regex (fuzzy) search</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org9a47b8a">9. Selecting</a></li>
+<li><a href="#org56b89db">10. Limiting Outcomes</a></li>
+<li><a href="#orgd5b9a24">11. Sorting</a></li>
+<li><a href="#org3981981">12. Aggregation</a></li>
+<li><a href="#orgbc3aad4">13. Modifying</a>
+<ul>
+<li><a href="#orgdec12c3">13.1. Creating Database</a></li>
+<li><a href="#org47e730e">13.2. Removing Database</a></li>
+<li><a href="#orgc5e6fa3">13.3. Creating Collection</a></li>
+<li><a href="#org44911e8">13.4. Removing Collection</a></li>
+<li><a href="#org68ce257">13.5. Updating Documents</a></li>
+<li><a href="#org4fc80a4">13.6. Adding Documents</a></li>
+<li><a href="#org27b4704">13.7. Removing Documents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orged5c5a4" class="outline-2">
+<h2 id="orged5c5a4"><span class="section-number-2">1</span> Installing Mongodb</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+To install Mongodb, go to the web-site:
+<a href="http://www.mongodb.com/download-center">http://www.mongodb.com/download-center</a>
+</p>
+
+<p>
+Mongodb exists in two forms:
+</p>
+<ul class="org-ul">
+<li>Enterprise version that runs as a cloud service (Atlas)</li>
+<li>Open Source community server version with minimal support (free)</li>
+</ul>
+
+<p>
+For our case we will be installing the open source server on our own
+computers:
+</p>
+<ul class="org-ul">
+<li>Click on the "server" tab</li>
+<li>Pick the correct binary package for your system and download</li>
+</ul>
+
+<p>
+Once downloaded you can unpack the tarball and use the binaries
+directly.
+</p>
+</div>
+</div>
+<div id="outline-container-org10f8852" class="outline-2">
+<h2 id="org10f8852"><span class="section-number-2">2</span> Starting Mongodb Server</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Before you start the Mongodb server, you need to first create a
+directory for Mongodb to store its databases.  You can create any
+directory on your computer:
+</p>
+<pre class="example">
+mkdir $HOME/data/mongo
+</pre>
+
+<p>
+Then you can start the Mongodb server, using the <code>mongod</code> binary
+from the tarball you have downloaded:
+</p>
+<pre class="example">
+mongod --dbpath $HOME/data/mongo
+</pre>
+<p>
+This should start the server, and as long as the server is running
+you will be able to connect to the databases.
+</p>
+</div>
+</div>
+<div id="outline-container-org705a29c" class="outline-2">
+<h2 id="org705a29c"><span class="section-number-2">3</span> Mongodb Data Structure</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The structure of the Mongodb is follows the hierarchy given below:
+</p>
+<ul class="org-ul">
+<li>Server
+<ul class="org-ul">
+<li>databases
+<ul class="org-ul">
+<li>collections
+<ul class="org-ul">
+<li>documents</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+The documents are represented in a dialect of JSON &#x2014; equivalent to
+a Python dictionary (consists of nested key-value pairs) &#x2014; which
+Mongodb calls "BSON".  Each document is equivalent to a row in
+relational database, and stores information of a single record.
+</p>
+
+<p>
+A collection contains a set of documents, and it is equivalent to a
+relational table. However, there are no relations between
+collections. You cannot join two collection together.  Instead,
+think of a single collection as a flat table that has everything
+already joined in. Due to the key-value data structure in the
+documents, NULL values are not stored. Mongodb is not designed for
+efficiency in storage, it is designed for efficiency in distributed
+computing, and quick searches, and it is a deliberate choice for not
+supporting join operations which are very difficult to implement in
+a distributed computation environment.
+</p>
+
+<p>
+A database is equivalent to a relational database, and holds one or
+more collections.  They serve as namespaces for the collections.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd20fe42" class="outline-2">
+<h2 id="orgd20fe42"><span class="section-number-2">4</span> List DBs and Collections</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+show dbs
+</pre>
+<p>
+displays list of existing databases.
+</p>
+
+<pre class="example">
+use test
+show collections
+</pre>
+<p>
+displays list of collections in the current database called 'test'
+</p>
+</div>
+</div>
+<div id="outline-container-org0f2649a" class="outline-2">
+<h2 id="org0f2649a"><span class="section-number-2">5</span> Querying Interface</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Mongodb supports several interfaces:
+</p>
+<ul class="org-ul">
+<li>a command-line based console</li>
+<li>a polished graphical console</li>
+<li>application APIs for all major programming languages</li>
+</ul>
+</div>
+<div id="outline-container-org01900c3" class="outline-3">
+<h3 id="org01900c3"><span class="section-number-3">5.1</span> Mongodb Console</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+The command line console can be started by running <code>mongo</code> from the
+downloaded binaries
+</p>
+<pre class="example">
+mongo
+</pre>
+<p>
+From the terminal, provided the server is already running.
+</p>
+
+<p>
+It will start a REPL environment for entering Mongodb query
+commands.
+</p>
+</div>
+</div>
+<div id="outline-container-org9d5b46a" class="outline-3">
+<h3 id="org9d5b46a"><span class="section-number-3">5.2</span> Compass</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Compass is a new graphical user interface that incorporates
+</p>
+<ul class="org-ul">
+<li>database management tool</li>
+<li>query editor and results display</li>
+</ul>
+
+<p>
+The commands used in compass differ slightly from the standard
+Mongodb commands. It is more user friendly, and contains built-in
+documentation.
+</p>
+
+<p>
+The Compass style commands can be executed from the mongo console
+as well, using the function:
+</p>
+<pre class="example">
+db.runCommand()
+</pre>
+</div>
+</div>
+<div id="outline-container-org1305dad" class="outline-3">
+<h3 id="org1305dad"><span class="section-number-3">5.3</span> Python Interface</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Python interface is provided by the <code>pymongo</code> module.
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> pymongo <span style="color: #859900; font-weight: bold;">import</span> MongoClient
+
+<span style="color: #586e75;"># </span><span style="color: #586e75;">connect to server</span>
+<span style="color: #586e75;"># </span><span style="color: #586e75;">automatically selects the currently running server</span>
+<span style="color: #268bd2;">client</span> = MongoClient()
+
+<span style="color: #586e75;"># </span><span style="color: #586e75;">select database called test</span>
+<span style="color: #268bd2;">db</span> = client.test
+
+<span style="color: #586e75;"># </span><span style="color: #586e75;">selecting a collection called restaurants</span>
+<span style="color: #268bd2;">collection</span> = db.restaurants
+
+<span style="color: #586e75;"># </span><span style="color: #586e75;">create a query on collection</span>
+<span style="color: #268bd2;">query</span> = collection.find({}).limit(5)
+
+<span style="color: #586e75;"># </span><span style="color: #586e75;">printing out results of query</span>
+<span style="color: #859900; font-weight: bold;">for</span> item <span style="color: #859900; font-weight: bold;">in</span> query:
+    <span style="color: #859900; font-weight: bold;">print</span>(item)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge32edf5" class="outline-2">
+<h2 id="orge32edf5"><span class="section-number-2">6</span> Importing JSON files</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+The following command in terminal will load a JSON file as a
+collection called "restaurants" into a database called "test":
+</p>
+<pre class="example">
+mongoimport --db test --collection restaurants --file ./restaurants.json
+</pre>
+</div>
+</div>
+<div id="outline-container-org6603f8f" class="outline-2">
+<h2 id="org6603f8f"><span class="section-number-2">7</span> Selecting Database</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+To select a database called "test":
+</p>
+<ul class="org-ul">
+<li><p>
+In mongo console:
+</p>
+<pre class="example">
+use test
+</pre></li>
+<li><p>
+In Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> pymongo <span style="color: #859900; font-weight: bold;">import</span> MongoClient
+<span style="color: #268bd2;">client</span> = MongoClient()
+<span style="color: #268bd2;">db</span> = client.test
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb09ee25" class="outline-2">
+<h2 id="orgb09ee25"><span class="section-number-2">8</span> Querying</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+The main querying function is <code>collection.find()</code>. Suppose we query
+the collection called 'restaurants' from database called 'test':
+</p>
+</div>
+
+<div id="outline-container-org93aa966" class="outline-3">
+<h3 id="org93aa966"><span class="section-number-3">8.1</span> Find All</h3>
+<div class="outline-text-3" id="text-8-1">
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({})
+</pre>
+<p>
+or
+</p>
+<pre class="example">
+db.runCommand(
+  {
+    find: 'restaurants',
+    filter: {}
+  }
+)
+</pre></li>
+<li><p>
+Compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7d892bc" class="outline-3">
+<h3 id="org7d892bc"><span class="section-number-3">8.2</span> Equality</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Find all restaurants in Brooklyn.
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'borough' : 'Brooklyn'})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'borough' : 'Brooklyn'}
+}
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'borough'</span> : <span style="color: #2aa198;">'Brooklyn'</span>})
+</pre>
+</div></li>
+</ul>
+
+<p>
+Find all resturants in Brooklyn whose cuisine is 'American '
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'borough' : 'Brooklyn', 'cuisine' : 'American '})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'borough' : 'Brooklyn', 'cuisine' : 'American '}
+}
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'borough'</span> : <span style="color: #2aa198;">'Brooklyn'</span>, <span style="color: #2aa198;">'cuisine'</span> : <span style="color: #2aa198;">'American '</span>})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org72069bb" class="outline-3">
+<h3 id="org72069bb"><span class="section-number-3">8.3</span> Nested Attributes</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Nested attributes are expressed using dot.
+</p>
+
+<p>
+Find all resturants who had has at least been graded 'A' once:
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'grades.grade' : 'A'})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'grades.grade' : 'A'}
+}
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'grades.grade'</span> : <span style="color: #2aa198;">'A'</span>})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org29735dd" class="outline-3">
+<h3 id="org29735dd"><span class="section-number-3">8.4</span> Operators</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Operators can be applied using the syntax:
+</p>
+<pre class="example">
+{$operator : argument}
+</pre>
+</div>
+<div id="outline-container-org6a20a11" class="outline-4">
+<h4 id="org6a20a11"><span class="section-number-4">8.4.1</span> Not Equal</h4>
+<div class="outline-text-4" id="text-8-4-1">
+<p>
+Find all restaurants who do not serve 'American ' food:
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'cuisine' : {$ne : 'American '}})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'cuisine' : {$ne : 'American '}}
+}
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'cuisine'</span> : {<span style="color: #2aa198;">'$ne'</span> : <span style="color: #2aa198;">'American '</span>}})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb3b1355" class="outline-4">
+<h4 id="orgb3b1355"><span class="section-number-4">8.4.2</span> Comparison</h4>
+<div class="outline-text-4" id="text-8-4-2">
+<p>
+Find all resturants whose most recent review was taken place later
+than in 2014-01-01
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'grades.date' : {$gt : ISODate('2014-01-01')}})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'grades.date' : {$gt : ISODate('2014-01-01')}}
+}
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> datetime <span style="color: #859900; font-weight: bold;">import</span> datetime
+<span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'grades.date'</span> : {<span style="color: #2aa198;">'$gt'</span> : datetime(2014, 1, 1)}})
+</pre>
+</div></li>
+</ul>
+
+<p>
+Other comparison operators:
+</p>
+<ul class="org-ul">
+<li><code>$gte</code>: greater than or equal to</li>
+<li><code>$lt</code>: less than</li>
+<li><code>$lte</code>: less than or equal to</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3f221cb" class="outline-4">
+<h4 id="org3f221cb"><span class="section-number-4">8.4.3</span> Existence</h4>
+<div class="outline-text-4" id="text-8-4-3">
+<p>
+Find all restaurants containing field called "address.street"
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'address.street' : {$exists : true}})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'address.street' : {$exists : true}}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'address.street'</span> : {<span style="color: #2aa198;">'$exists'</span> : <span style="color: #268bd2; font-weight: bold;">True</span>}})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5a6cd3a" class="outline-4">
+<h4 id="org5a6cd3a"><span class="section-number-4">8.4.4</span> In a collection</h4>
+<div class="outline-text-4" id="text-8-4-4">
+<p>
+Find all restaurants that are in boroughs: Brooklyn, Manhattan and Queens
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'borough' : {$in: ['Brooklyn', 'Manhattan', 'Queens']}})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'borough' : {$in: ['Brooklyn', 'Manhattan', 'Queens']}}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'borough'</span> : {<span style="color: #2aa198;">'$in'</span>: [<span style="color: #2aa198;">'Brooklyn'</span>, <span style="color: #2aa198;">'Manhattan'</span>, <span style="color: #2aa198;">'Queens'</span>]}})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org89416ca" class="outline-4">
+<h4 id="org89416ca"><span class="section-number-4">8.4.5</span> or</h4>
+<div class="outline-text-4" id="text-8-4-5">
+<p>
+find all restaurants that either are in Manhattan or serves Chinese food
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({$or: [{'borough' : 'Manhattan'}, {'cuisine' : 'Chinese'}]))
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {$or: [{'borough' : 'Manhattan'}, {'cuisine' : 'Chinese'}])
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python">collection.find({<span style="color: #2aa198;">'$or'</span>: [{<span style="color: #2aa198;">'borough'</span> : <span style="color: #2aa198;">'Manhattan'</span>}, {<span style="color: #2aa198;">'cuisine'</span> : <span style="color: #2aa198;">'Chinese'</span>}]))
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3cde561" class="outline-4">
+<h4 id="org3cde561"><span class="section-number-4">8.4.6</span> Search within a nested element</h4>
+<div class="outline-text-4" id="text-8-4-6">
+<p>
+Suppose we wish to find restaurants who has obtained an 'A' grade
+in a review dating no later than 2014-01-01:
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({{'grades' : {
+  $elemMatch : {
+    $and : [
+      {'grade': 'A'},
+      {'date': {$gte : ISODate('2014-01-01')}}
+    ]
+  }
+}}
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+   find: 'restaurants',
+   filter: {'grades' : {
+              $elemMatch : {
+                $and : [
+                  {'grade': 'A'},
+                  {'date': {$gte : ISODate('2014-01-01')}}
+                ]
+              }
+            }
+          }
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> datetime <span style="color: #859900; font-weight: bold;">import</span> datetime
+<span style="color: #268bd2;">query</span> = collection.find({
+  <span style="color: #2aa198;">'grades'</span> : {
+    <span style="color: #2aa198;">'$elemMatch'</span> : {
+      <span style="color: #2aa198;">'$and'</span> : [
+        {<span style="color: #2aa198;">'grade'</span>: <span style="color: #2aa198;">'A'</span>},
+        {<span style="color: #2aa198;">'date'</span>: {<span style="color: #2aa198;">'$gte'</span> : datetime(2014,1,1)}}
+      ]
+    }
+  }
+})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc9d73ab" class="outline-4">
+<h4 id="orgc9d73ab"><span class="section-number-4">8.4.7</span> Regex (fuzzy) search</h4>
+<div class="outline-text-4" id="text-8-4-7">
+<p>
+Find all resturants whose name starts with letter 'W':
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({'name' : /^W.*$/})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {'name' : /^W.*$/}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">import</span> re
+<span style="color: #268bd2;">query</span> = collection.find({<span style="color: #2aa198;">'name'</span> : re.<span style="color: #839496; font-weight: bold;">compile</span>(r<span style="color: #2aa198;">'^W.*$'</span>)})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9a47b8a" class="outline-2">
+<h2 id="org9a47b8a"><span class="section-number-2">9</span> Selecting</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Selecting column 'name' only:
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({},
+                    {'name' : 1})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {}
+  project: {'name': 1}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({},
+                        {<span style="color: #2aa198;">'name'</span> : 1})
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org56b89db" class="outline-2">
+<h2 id="org56b89db"><span class="section-number-2">10</span> Limiting Outcomes</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Limit query result to 5
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({}).limit(5)
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {}
+  limit: 5
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({}).limit(5)
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd5b9a24" class="outline-2">
+<h2 id="orgd5b9a24"><span class="section-number-2">11</span> Sorting</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Sort name of restaurants in alphabetical ascending order
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.find({}).sort({'name' : 1})
+</pre></li>
+<li><p>
+compass:
+</p>
+<pre class="example">
+{
+  find: 'restaurants',
+  filter: {}
+  sort: {'name' : 1}
+}
+</pre></li>
+<li><p>
+Python:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.find({}).sort(<span style="color: #2aa198;">'name'</span>, 1)
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3981981" class="outline-2">
+<h2 id="org3981981"><span class="section-number-2">12</span> Aggregation</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Reference: <a href="https://docs.mongodb.com/manual/aggregation/">https://docs.mongodb.com/manual/aggregation/</a>
+</p>
+
+<p>
+Mongodb aggregations are defined using a pipeline: suppose we want
+to count the number of 'American ' cuisine resturants in each borough
+</p>
+<ul class="org-ul">
+<li><p>
+mongo console:
+</p>
+<pre class="example">
+db.restaurants.aggregate(
+  [
+    {$match : {'cuisine' : 'American '}},
+    {$group : {'_id' : '$borough', 'count' : {'$sum': 1}}}
+  ]
+)
+</pre></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #268bd2;">query</span> = collection.aggregate(
+  [
+    {<span style="color: #2aa198;">'$match'</span> : {<span style="color: #2aa198;">'cuisine'</span> : <span style="color: #2aa198;">'American '</span>}},
+    {<span style="color: #2aa198;">'$group'</span> : {<span style="color: #2aa198;">'_id'</span> : <span style="color: #2aa198;">'$borough'</span>, <span style="color: #2aa198;">'count'</span> : {<span style="color: #2aa198;">'$sum'</span>: 1}}}
+  ]
+)
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbc3aad4" class="outline-2">
+<h2 id="orgbc3aad4"><span class="section-number-2">13</span> Modifying</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-orgdec12c3" class="outline-3">
+<h3 id="orgdec12c3"><span class="section-number-3">13.1</span> Creating Database</h3>
+<div class="outline-text-3" id="text-13-1">
+<ul class="org-ul">
+<li><p>
+mongo console
+</p>
+<pre class="example">
+use new_database
+</pre>
+<p>
+will create a new database if the 'new_database' does not exist
+</p></li>
+<li><p>
+Python
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #859900; font-weight: bold;">from</span> pymongo <span style="color: #859900; font-weight: bold;">import</span> MongoClient
+<span style="color: #268bd2;">client</span> = MongoClient()
+<span style="color: #268bd2;">db</span> = client[<span style="color: #2aa198;">'new_database'</span>]
+</pre>
+</div>
+<p>
+Will create 'new_database' if it does not exist.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org47e730e" class="outline-3">
+<h3 id="org47e730e"><span class="section-number-3">13.2</span> Removing Database</h3>
+<div class="outline-text-3" id="text-13-2">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+use mydatabase
+db.dropDatabase()
+</pre>
+<p>
+will delete the current database.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5e6fa3" class="outline-3">
+<h3 id="orgc5e6fa3"><span class="section-number-3">13.3</span> Creating Collection</h3>
+<div class="outline-text-3" id="text-13-3">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+use mydatabase
+db.createCollection(new_collection)
+</pre>
+<p>
+will create a new collection called "new_collection".
+</p>
+</div>
+</div>
+<div id="outline-container-org44911e8" class="outline-3">
+<h3 id="org44911e8"><span class="section-number-3">13.4</span> Removing Collection</h3>
+<div class="outline-text-3" id="text-13-4">
+<pre class="example">
+use test
+db.mycollection.drop()
+</pre>
+<p>
+deletes collection called 'mycollection' from the current database called 'test'.
+</p>
+</div>
+</div>
+<div id="outline-container-org68ce257" class="outline-3">
+<h3 id="org68ce257"><span class="section-number-3">13.5</span> Updating Documents</h3>
+<div class="outline-text-3" id="text-13-5">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+db.restaurants.update(
+    // match rows first
+    {'cuisine' : 'American '},
+    // how you want to add/replace values
+    {$set : {'cuisine' : 'USA'}}
+)
+</pre>
+<p>
+will replace all 'American ' cuisine type to 'USA'.
+</p>
+</div>
+</div>
+<div id="outline-container-org4fc80a4" class="outline-3">
+<h3 id="org4fc80a4"><span class="section-number-3">13.6</span> Adding Documents</h3>
+<div class="outline-text-3" id="text-13-6">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+db.restaurants.insert(
+  {
+    'name' : 'my restaurant',
+    'cuisine' : 'International'
+  }
+)
+</pre>
+<p>
+Will insert this document to the restaurants collection.
+</p>
+</div>
+</div>
+<div id="outline-container-org27b4704" class="outline-3">
+<h3 id="org27b4704"><span class="section-number-3">13.7</span> Removing Documents</h3>
+<div class="outline-text-3" id="text-13-7">
+<p>
+In mongo console:
+</p>
+<pre class="example">
+db.restaurants.remove({'name' : 'my restaurant'})
+</pre>
+<p>
+Remove all entries matching <code>{'name' : 'my restaurant'}</code>
+</p>
+
+<p>
+And
+</p>
+<pre class="example">
+db.restaurants.remove({'name' : 'my restaurant}i, 1)
+</pre>
+<p>
+Remove the first instance matching <code>{'name' : 'my restaurant'}</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Lianheng Tong</p>
+<p class="date">Created: 2018-11-29 Thu 12:41</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

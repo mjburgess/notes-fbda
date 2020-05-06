@@ -1228,6 +1228,639 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Features \n",
+    "    * dimensions of an observation\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 112,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "a = [25, 100, 130]\n",
+    "b = [35, 80, 130]\n",
+    "c = [45, 50, 130]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 114,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(3,)"
+      ]
+     },
+     "execution_count": 114,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "xa = np.array(a)\n",
+    "\n",
+    "xa.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 115,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[ 25],\n",
+       "       [100],\n",
+       "       [130]])"
+      ]
+     },
+     "execution_count": 115,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "xa.reshape(3, 1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 116,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[ 25],\n",
+       "       [100],\n",
+       "       [130]])"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "xa.reshape(-1, 1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 118,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "time = np.arange(1, 10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 119,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([1, 2, 3, 4, 5, 6, 7, 8, 9])"
+      ]
+     },
+     "execution_count": 119,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "time"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 120,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([3000., 4500., 6000.])"
+      ]
+     },
+     "execution_count": 120,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.linspace(3000, 6000, 3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 121,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = [a, b, c]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 122,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[[25, 100, 130], [35, 80, 130], [45, 50, 130]]"
+      ]
+     },
+     "execution_count": 122,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 124,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "X = np.array(X)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 125,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[ 25, 100, 130],\n",
+       "       [ 35,  80, 130],\n",
+       "       [ 45,  50, 130]])"
+      ]
+     },
+     "execution_count": 125,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 126,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "25"
+      ]
+     },
+     "execution_count": 126,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[0 , 0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 127,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "130"
+      ]
+     },
+     "execution_count": 127,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[-1, -1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 128,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[ 25, 100],\n",
+       "       [ 35,  80]])"
+      ]
+     },
+     "execution_count": 128,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[0:2, 0:2]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 129,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([[ 25, 100],\n",
+       "       [ 35,  80]])"
+      ]
+     },
+     "execution_count": 129,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[:2, :2]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 130,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([25, 35, 45])"
+      ]
+     },
+     "execution_count": 130,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[:, 0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 131,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([130, 130, 130])"
+      ]
+     },
+     "execution_count": 131,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[:, -1]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "$f(X) = 3X_1 + 2X_2 + 10$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 132,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([135, 125, 105])"
+      ]
+     },
+     "execution_count": 132,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "X[:, 0] + X[:, 1] + 10"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Seaborn"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 133,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import seaborn as sns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 135,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = sns.load_dataset('tips')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 136,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>total_bill</th>\n",
+       "      <th>tip</th>\n",
+       "      <th>sex</th>\n",
+       "      <th>smoker</th>\n",
+       "      <th>day</th>\n",
+       "      <th>time</th>\n",
+       "      <th>size</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>144</th>\n",
+       "      <td>16.43</td>\n",
+       "      <td>2.30</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Thur</td>\n",
+       "      <td>Lunch</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>218</th>\n",
+       "      <td>7.74</td>\n",
+       "      <td>1.44</td>\n",
+       "      <td>Male</td>\n",
+       "      <td>Yes</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>29</th>\n",
+       "      <td>19.65</td>\n",
+       "      <td>3.00</td>\n",
+       "      <td>Female</td>\n",
+       "      <td>No</td>\n",
+       "      <td>Sat</td>\n",
+       "      <td>Dinner</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "     total_bill   tip     sex smoker   day    time  size\n",
+       "144       16.43  2.30  Female     No  Thur   Lunch     2\n",
+       "218        7.74  1.44    Male    Yes   Sat  Dinner     2\n",
+       "29        19.65  3.00  Female     No   Sat  Dinner     2"
+      ]
+     },
+     "execution_count": 136,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sample(3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 138,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    1.01\n",
+       "1    1.66\n",
+       "2    3.50\n",
+       "3    3.31\n",
+       "4    3.61\n",
+       "Name: tip, dtype: float64"
+      ]
+     },
+     "execution_count": 138,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['tip'].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 140,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>sex</th>\n",
+       "      <th>time</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Female</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>Male</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Male</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>Male</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>Female</td>\n",
+       "      <td>Dinner</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      sex    time\n",
+       "0  Female  Dinner\n",
+       "1    Male  Dinner\n",
+       "2    Male  Dinner\n",
+       "3    Male  Dinner\n",
+       "4  Female  Dinner"
+      ]
+     },
+     "execution_count": 140,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[ ['sex', 'time']].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 143,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    1.01\n",
+       "1    1.66\n",
+       "2    3.50\n",
+       "3    3.31\n",
+       "4    3.61\n",
+       "Name: tip, dtype: float64"
+      ]
+     },
+     "execution_count": 143,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.loc[ : , 'tip'].head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 145,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    False\n",
+       "1     True\n",
+       "2     True\n",
+       "3     True\n",
+       "4    False\n",
+       "Name: sex, dtype: bool"
+      ]
+     },
+     "execution_count": 145,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "(df['sex'] == 'Male').head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 150,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1    1.66\n",
+       "2    3.50\n",
+       "3    3.31\n",
+       "5    4.71\n",
+       "6    2.00\n",
+       "Name: tip, dtype: float64"
+      ]
+     },
+     "execution_count": 150,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "(df.loc[ df['sex'] == 'Male', 'tip']).head()"
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": null,
    "metadata": {},
